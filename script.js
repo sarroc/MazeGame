@@ -40,7 +40,7 @@ while (counter > 0) {
 
     const temp = arr[counter];
     arr[counter] = arr[index];
-    arr[index = temp;]
+    arr[index] = temp;
  }
  return arr;
 };
@@ -94,10 +94,14 @@ const stepThroughCell = (row, column) => {
     }
 
     // Remove a wall from either horizontals or verticals
-    
+    if (direction === 'left') {
+        verticals[row][column - 1] = true;
+    } else if (direction === 'right') {
+        verticals[row][column] = true;
     }
+}
 
     // Visit that next cell
 };
 
-stepThroughCell(startRow, startColumn)
+stepThroughCell(1, 1);

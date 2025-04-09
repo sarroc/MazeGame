@@ -1,8 +1,8 @@
 const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
-const cells = 3;
-const width = 600;
-const height = 600;
+const cells = 6;
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 const unitLength = width / cells;
 
@@ -32,6 +32,7 @@ const walls = [
 World.add(world, walls);
 
 // Maze generation
+
 const shuffle = (arr) => {
 let counter = arr.length;
 
@@ -44,6 +45,7 @@ while (counter > 0) {
     arr[counter] = arr[index];
     arr[index] = temp;
  }
+
  return arr;
 };
 
@@ -86,7 +88,12 @@ const stepThroughCell = (row, column) => {
         const [nextRow, nextColumn, direction] = neighbor;
 
     // See if that neighbor is out of bounds
-    if (nextRow < 0 || nextRow >= cells || nextColumn < 0 || nextColumn >= cells) {
+    if (
+        nextRow < 0 || 
+        nextRow >= cells || 
+        nextColumn < 0 || 
+        nextColumn >= cells
+    ) {
       continue;  
     }
     
@@ -124,8 +131,9 @@ stepThroughCell(startRow, startColumn);
             columnIndex * unitLength + unitLength / 2,
             rowIndex * unitLength + unitLength,
             unitLength,
-            10,
+            5,
             {
+                label: 'wall',
                 isStatic: true
             }
         );
@@ -139,12 +147,13 @@ row.forEach((open, columnIndex) => {
         return;
     }
 
-    const wall = Bodies.rectangle (
+    const wall = Bodies.rectangle(
        columnIndex * unitLength + unitLength,
        columnIndex * unitLength + unitLength / 2,
-       10,
+       5,
        unitLength,
        {
+        label: 'wall',
         isStatic: true
        }
     );
@@ -202,9 +211,15 @@ const ball = Bodies.circle(
         event.pairs.forEach(collision => {
            const labels = ['ball', 'goal'];
 
-           if (labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label)
-        ) {
-            console.log('User won!');
+           if (labels.includes(collision.bodyA.label) && 
+           labels.includes(collision.bodyB.label)
+            ) {
+            world.gravity.y = 1;
+            world.bodies.forEach(body => {
+                if (body.label === 'wall') {
+                    Body.setStatic(body, false);
+                }
+            });
         }
         });
     });

@@ -31,7 +31,6 @@ const walls = [
 World.add(world, walls);
 
 // Maze generation
-
 const shuffle = (arr) => {
 let counter = arr.length;
 
@@ -152,6 +151,8 @@ row.forEach((open, columnIndex) => {
     });
 });
 
+// Goal
+
 const goal = Bodies.rectangle (
 width - unitLength / 2,
 height - unitLength / 2,
@@ -162,3 +163,11 @@ unitLength * .7,
 }
 );
 World.add(world, goal);
+
+// Ball
+
+const ball = Bodies.circle(
+    unitLength / 2,
+    unitLength / 2,
+    unitLength / 4);
+    World.add(world, ball);

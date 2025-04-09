@@ -49,7 +49,7 @@ World.add(
   } 
 }
 
-// Maze generation with a for loop (not recommendend)
+// Maze generation with a for loop (not recommendend but po)
 
 const grid = [];
 for (let i = 0; i < 3; i++) {

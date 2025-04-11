@@ -1,7 +1,7 @@
 const { Engine, Render, Runner, World, Bodies, Body, Events } = Matter;
 
-const cellsHorizontal = 4;
-const cellsVertical = 3;
+const cellsHorizontal = 14;
+const cellsVertical = 10;
 const width = window.innerWidth;
 const height = window.innerHeight;
 
@@ -15,16 +15,16 @@ const render = Render.create({
 element: document.body,
 engine: engine,
 options: {
-    wireframes: true,
+    wireframes: false,
     width,
     height
 }
 });
-
 Render.run(render);
 Runner.run(Runner.create(), engine);
 
 // Walls
+
 const walls = [
     Bodies.rectangle(width / 2, 0, width, 2, { isStatic: true }),
     Bodies.rectangle(width /2, height, width, 2, { isStatic: true}),
@@ -35,7 +35,7 @@ World.add(world, walls);
 
 // Maze generation
 
-const shuffle = (arr) => {
+const shuffle = arr => {
 let counter = arr.length;
 
 while (counter > 0) {
@@ -136,7 +136,10 @@ stepThroughCell(startRow, startColumn);
             5,
             {
                 label: 'wall',
-                isStatic: true
+                isStatic: true,
+                render: {
+                    fillStyle: 'red'
+                }
             }
         );
         World.add(world, wall)
@@ -172,7 +175,10 @@ unitLengthX * .7,
 unitLengthY * .7,
 {
     label: 'goal',
-    isStatic: true
+    isStatic: true,
+    render: {
+        fillStyle: 'green'
+    }
 }
 );
 World.add(world, goal);
@@ -184,7 +190,10 @@ const ball = Bodies.circle(
     unitLengthX / 2,
     unitLengthY / 2,
     ballRadius, {
-        label: 'ball'
+        label: 'ball',
+        render: {
+            fillStyle: 'blue'
+        }
     });
     World.add(world, ball);
 

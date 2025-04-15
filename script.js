@@ -18,7 +18,7 @@ options: {
     wireframes: false,
     width,
     height
-}
+    }
 });
 Render.run(render);
 Runner.run(Runner.create(), engine);
@@ -27,9 +27,9 @@ Runner.run(Runner.create(), engine);
 
 const walls = [
     Bodies.rectangle(width / 2, 0, width, 2, { isStatic: true }),
-    Bodies.rectangle(width /2, height, width, 2, { isStatic: true}),
-    Bodies.rectangle(0, height / 2, 2, height, { isStatic: true}),
-    Bodies.rectangle(width, height / 2, 2, height, { isStatic: true})
+    Bodies.rectangle(width /2, height, width, 2, { isStatic: true }),
+    Bodies.rectangle(0, height / 2, 2, height, { isStatic: true }),
+    Bodies.rectangle(width, height / 2, 2, height, { isStatic: true })
 ];
 World.add(world, walls);
 
@@ -116,10 +116,10 @@ const stepThroughCell = (row, column) => {
     }
 
     stepThroughCell(nextRow, nextColumn);
-}
-
-    // Visit that next cell
+    }
 };
+
+// Visit that next cell
 
 stepThroughCell(startRow, startColumn);
 
@@ -174,8 +174,8 @@ row.forEach((open, columnIndex) => {
 const goal = Bodies.rectangle (
 width - unitLengthX / 2,
 height - unitLengthY / 2,
-unitLengthX * .7,
-unitLengthY * .7,
+unitLengthX * 0.7,
+unitLengthY * 0.7,
 {
     label: 'goal',
     isStatic: true,
